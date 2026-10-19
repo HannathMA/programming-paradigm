@@ -96,6 +96,45 @@ Frontend runs on `http://127.0.0.1:5173`.
 
 ---
 
+## 🌐 Production Deployment Guide
+
+### Part 1: Deploy Backend to Render (Free Web Service)
+1. Go to [render.com](https://render.com) and log in with your GitHub account.
+2. Click **New +** &rarr; **Web Service**.
+3. Connect your repository: `https://github.com/HannathMA/programming-paradigm`.
+4. Configure settings:
+   - **Environment**: `Docker` (Render will automatically detect `backend/Dockerfile` with SWI-Prolog & Python).
+   - **Root Directory**: `backend` (or use `render.yaml` Blueprint).
+   - **Plan**: `Free`.
+5. Under **Environment Variables**, add:
+   - `GEMINI_API_KEY`: *(Your Google Gemini API key)*
+6. Click **Create Web Service**. Once deployed, copy your Render URL (e.g., `https://smart-traffic-backend.onrender.com`).
+
+---
+
+### Part 2: Deploy Frontend to Vercel or Netlify
+
+#### Option A: Vercel (Recommended)
+1. Go to [vercel.com](https://vercel.com) and import your `HannathMA/programming-paradigm` repository.
+2. Settings:
+   - **Framework Preset**: `Vite`
+   - **Root Directory**: `frontend` (or leave root with the included `vercel.json`)
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+3. Under **Environment Variables**, add:
+   - `VITE_API_URL`: Your Render backend URL (e.g., `https://smart-traffic-backend.onrender.com`)
+4. Click **Deploy**!
+
+#### Option B: Netlify
+1. Go to [netlify.com](https://netlify.com) and click **Add new site** &rarr; **Import an existing project**.
+2. Select your `HannathMA/programming-paradigm` repository.
+3. The included `netlify.toml` automatically configures the build (`base = "frontend"`, `publish = "dist"`).
+4. In **Site Settings** &rarr; **Environment Variables**, add:
+   - `VITE_API_URL`: Your Render backend URL (e.g., `https://smart-traffic-backend.onrender.com`)
+5. Click **Deploy Site**!
+
+---
+
 ## ⚖️ Paradigm Summary
 
 | Metric / Dimension | Prolog (Declarative Logic) | Python (Imperative Dijkstra) |

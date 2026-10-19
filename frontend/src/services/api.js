@@ -2,7 +2,8 @@
  * API Service for communicating with the Flask Backend.
  */
 
-const BASE_URL = '/api';
+const RAW_URL = import.meta.env.VITE_API_URL || '';
+const BASE_URL = RAW_URL ? `${RAW_URL.replace(/\/+$/, '')}/api` : '/api';
 
 async function request(endpoint, options = {}) {
   try {
